@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="post">
+        {% if post.image_url %}
+        <img src="{{ post.image_url }}" class="img-fluid mb-4" alt="{{ post.title }}">
+        {% endif %}
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.content }}</p>
+    </div>
+    <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Back to Home</a>
+</div>
+{% endblock %}
+

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to Our Blog</h1>
+    <p class="lead">Post Articles for knowledge</p>
+    <hr class="my-4">
+    <p>Explore the latest posts below</p>
+    <a href="{{ url_for('new_post') }}" class="btn btn-primary">New Post</a>
+</div>
+
+<div class="row">
+    {% for post in posts %}
+    <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+            {% if post.image_url %}
+            <img src="{{ post.image_url }}" class="card-img-top" alt="{{ post.title }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.content[:100] }}...</p>
+                <a href="{{ url_for('post', post_id=post.id) }}" class="btn btn-primary">Read More</a>
+            </div>
+            <form action="{{ url_for('delete_post', post_id=post.id) }}" method="post">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
